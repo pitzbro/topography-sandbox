@@ -6,6 +6,7 @@ var vectorHeight = new THREE.Vector2(topographyHeight, topographyHeight);
 
 //fog
 var fogIntensity = 2000;
+var fogColor = '0x000000';
 
 //camera
 var cameraHeight = 1500;
@@ -29,7 +30,10 @@ function changeTopography() {
 
     //fog
     fogIntensity = inputs.fogIntensity.value;
+    fogColor = '0x' + inputs.fogColor.value.substring(1);
+
     scene.fog.near = fogIntensity;
+    scene.fog.color.setHex(fogColor);
 
     //Camera
     cameraHeight = inputs.cameraHeightRange.value;
@@ -180,9 +184,13 @@ function init() {
     var specularMap = new THREE.WebGLRenderTarget(2048, 2048, pars);
     specularMap.texture.generateMipmaps = false;
 
-    var diffuseTexture1 = textureLoader.load("textures/terrain/grasslight-big.jpg");
-    var diffuseTexture2 = textureLoader.load("textures/terrain/backgrounddetailed6.jpg");
-    var detailTexture = textureLoader.load("textures/terrain/grasslight-big-nm.jpg");
+    // var diffuseTexture1 = textureLoader.load("textures/terrain/grasslight-big.jpg");
+    // var diffuseTexture2 = textureLoader.load("textures/terrain/backgrounddetailed6.jpg");
+    // var detailTexture = textureLoader.load("textures/terrain/grasslight-big-nm.jpg");
+
+    var diffuseTexture1 = textureLoader.load("textures/terrain/001.jpg");
+    var diffuseTexture2 = textureLoader.load("textures/terrain/002.jpg");
+    var detailTexture = textureLoader.load("textures/terrain/003.jpg");
 
     diffuseTexture1.wrapS = diffuseTexture1.wrapT = THREE.RepeatWrapping;
     diffuseTexture2.wrapS = diffuseTexture2.wrapT = THREE.RepeatWrapping;
@@ -337,7 +345,8 @@ function render() {
 
         var valNorm = (lightVal - fLow) / (fHigh - fLow);
 
-        scene.fog.color.setHSL(0.1, 0.5, lightVal);
+        // scene.fog.color.setHSL(0.1, 0.5, lightVal);
+        scene.fog.color.setHex(fogColor);
 
         renderer.setClearColor(scene.fog.color);
 
