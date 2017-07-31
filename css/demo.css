@@ -21,6 +21,7 @@ a { color: #fb0; }
 
 .sidebar {    
     position: absolute;
+    z-index: 900;
     left: 0;
     top: 0;
     width: 300px;
@@ -28,4 +29,9 @@ a { color: #fb0; }
     background: rgba(0, 0, 0, 0.56);
     padding: 50px 20px;
     text-align: left;
+}
+
+.sidebar input {
+    float: right;
+    /*display: block;*/
 }
