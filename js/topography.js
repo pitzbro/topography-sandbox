@@ -1,28 +1,55 @@
 // GLOBALS
 
+//topography
+var topographyHeight = 1.5;
+var vectorHeight = new THREE.Vector2(topographyHeight, topographyHeight);
+
+//fog
+var fogIntensity = 2000;
+
 //camera
 var cameraHeight = 1500;
 var cameraTilt = 1500;
 var cameraPan = -1500;
 
+//lights
+
+var lightAmbientColor = '0x111111';
+var lightDirectionalColor = '0xffffff';
+var lightPointColor = '0xff4400';
+
 
 function changeTopography() {
 
     var inputs = document.getElementsByClassName("gui-input");
-    
+
+    //Topography
+    topographyHeight = inputs.topographyHeight.value;
+    vectorHeight.set ( topographyHeight, topographyHeight );
+
+    //fog
+    fogIntensity = inputs.fogIntensity.value;
+    scene.fog.near = fogIntensity;
+
+    //Camera
     cameraHeight = inputs.cameraHeightRange.value;
     cameraTilt = inputs.cameraTiltRange.value;
     cameraPan = inputs.cameraPanRange.value;
 
     camera.position.set(cameraPan, cameraHeight, cameraTilt);
 
-    // camera.aspect = SCREEN_WIDTH / SCREEN_HEIGHT;
-    // camera.updateProjectionMatrix();
+    //lights
 
-    // document.getElementById('container').innerHTML = "";
-    // render(); 
-    // restart(); 
-    // controls.update();
+    lightAmbientColor = '0x' + inputs.lightAmbientColor.value.substring(1);
+    lightDirectionalColor = '0x' + inputs.lightDirectionalColor.value.substring(1);
+    lightPointColor = '0x' + inputs.lightPointColor.value.substring(1);
+
+
+    ambientLight.color.setHex( lightAmbientColor );
+    directionalLight.color.setHex( lightDirectionalColor );
+    pointLight.color.setHex( lightPointColor );
+
+
 }
 
 if (!Detector.webgl) Detector.addGetWebGLMessage();
@@ -83,7 +110,7 @@ function init() {
     // CAMERA
 
     camera = new THREE.PerspectiveCamera(40, SCREEN_WIDTH / SCREEN_HEIGHT, 2, 4000);
-    camera.position.set(-1200, cameraHeight, 1200);
+    camera.position.set(cameraPan, cameraHeight, cameraTilt);
 
     controls = new THREE.OrbitControls(camera);
     controls.target.set(0, 0, 0);
@@ -97,11 +124,13 @@ function init() {
     // SCENE (FINAL)
 
     scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x050505, 2000, 4000);
+    scene.fog = new THREE.Fog(0x050505, fogIntensity, 4000);
 
     // LIGHTS
 
-    scene.add(new THREE.AmbientLight(0x111111));
+    ambientLight = new THREE.AmbientLight(0x111111);
+    scene.add(ambientLight);
+    // scene.add(new THREE.AmbientLight(lightAmbientColor));
 
     directionalLight = new THREE.DirectionalLight(0xffffff, 1.15);
     directionalLight.position.set(500, 2000, 0);
@@ -128,7 +157,7 @@ function init() {
     uniformsNoise = {
 
         time: { value: 1.0 },
-        scale: { value: new THREE.Vector2(1.5, 1.5) },
+        scale: { value: vectorHeight },
         offset: { value: new THREE.Vector2(0, 0) }
 
     };
@@ -248,7 +277,7 @@ function init() {
 
     window.addEventListener('resize', onWindowResize, false);
 
-    document.addEventListener('keydown', onKeyDown, false);
+    // document.addEventListener('keydown', onKeyDown, false);
 
 }
 
@@ -268,18 +297,18 @@ function onWindowResize(event) {
 
 //
 
-function onKeyDown(event) {
+// function onKeyDown(event) {
 
-    switch (event.keyCode) {
+//     switch (event.keyCode) {
 
-        case 78: /*N*/  lightDir *= -1; break;
-        case 77: /*M*/  animDeltaDir *= -1; break;
+//         case 78: /*N*/  lightDir *= -1; break;
+//         case 77: /*M*/  animDeltaDir *= -1; break;
 
 
-    }
-    console.log('animDeltaDir', animDeltaDir);
+//     }
+//     console.log('animDeltaDir', animDeltaDir);
 
-}
+// }
 
 //
 
