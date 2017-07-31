@@ -1,0 +1,31 @@
+body {
+    background: #000;
+    color: #999;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    font-family: georgia;
+    font-size:1em;
+    text-align: center;
+}
+
+#info { position: absolute; top: 10px; width: 100%; }
+
+a { color: #fb0; }
+
+#footer { position: absolute; bottom: 10px; width: 100%; }
+.h { color: #fb0 }
+.c { display: inline; margin-left: 1em }
+
+/*----Asi changes---*/
+
+.sidebar {    
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.56);
+    padding: 50px 20px;
+    text-align: left;
+}
