@@ -11,7 +11,13 @@
 	<body>
 		<div id="container"></div>
 
-		<div id="sidebar-gui" class="sidebar gui">
+		<div id="sidebar-gui" class="sidebar gui open">
+
+			<button id="toggle-sidebar-btn" class="toggle-sidebar-btn" onclick="toggleSidebar()"></button>
+
+			<div class="scroll-el">
+
+			<section>
 
 			<h2>Topography</h2>
 
@@ -29,6 +35,9 @@
 				   oninput="changeTopography()">
 
 			</div>
+
+			</section>
+			<section>	
 
 			<h2>Fog</h2>
 
@@ -59,6 +68,9 @@
 
 			</div>
 
+			</section>
+			<section>	
+
 			<h2>Camera</h2>
 
 			<div>
@@ -79,6 +91,7 @@
 			<div>
 
 			<label>Camera Tilt/Pan</label>
+			<div>
 
 			<input class="gui-input" 
 				   name="cameraTiltRange" 
@@ -91,8 +104,6 @@
 				   oninput="changeTopography()">
 
 
-			<!--<label>Camera Pan</label>-->
-
 			<input class="gui-input" 
 				   name="cameraPanRange" 
 				   type="range" 
@@ -102,6 +113,7 @@
 				   step="10" 
 				   list="camera-tickmarks-minus" 
 				   oninput="changeTopography()">
+			</div>
 
 			</div>
 
@@ -124,6 +136,9 @@
 				<option value="-2500">
 				<option value="-3000" label="-3000">
 			</datalist>
+
+			</section>
+			<section>	
 
 			<h2>Lights</h2>
 
@@ -162,6 +177,17 @@
 				   value="#ff4400" 
 				   oninput="changeTopography()">
 
+			</div>
+
+			</section>
+			<section>	
+
+			<h2>Code</h2>
+
+			<pre><code class="topography-code"></code></pre>
+
+			</section>
+			
 			</div>
 
 			<div>

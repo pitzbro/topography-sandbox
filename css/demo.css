@@ -7,6 +7,15 @@ body {
     font-family: georgia;
     font-size:1em;
     text-align: center;
+    line-height: 1;
+}
+
+h2 {
+    color: #fff;
+}
+
+pre {
+    padding-bottom: 30px;
 }
 
 #info { position: absolute; top: 10px; width: 100%; }
@@ -19,6 +28,34 @@ a { color: #fb0; }
 
 /*----Asi changes---*/
 
+button.toggle-sidebar-btn {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right: -40px;
+    top: 50px;
+    background: rgba(193, 73, 73, 0.29);
+    color: #fff;
+    border-left: none;
+    border-radius: 0 50% 50% 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.sidebar.open button.toggle-sidebar-btn:before {
+    content: 'X';
+}
+
+.sidebar button.toggle-sidebar-btn:before {
+    content: '>';
+}
+
+button:focus {
+    outline: none;
+}
+
+
 .sidebar {    
     position: absolute;
     z-index: 900;
@@ -27,11 +64,34 @@ a { color: #fb0; }
     width: 300px;
     height: 100%;
     background: rgba(0, 0, 0, 0.56);
-    padding: 50px 20px;
+    padding: 15px;
     text-align: left;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s;
 }
 
-.sidebar input {
-    float: right;
-    /*display: block;*/
+.scroll-el {
+    overflow: auto;
+}
+
+.sidebar.open {
+    transform: translate(0, 0);
+}
+
+.sidebar section {    
+    background: rgba(74, 74, 74, 0.24);
+    padding: 1px 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+.sidebar label {    
+    width: 100%;
+}
+
+.sidebar section > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }

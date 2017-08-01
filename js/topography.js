@@ -22,11 +22,11 @@ var lightPointColor = '0xff4400';
 
 function changeTopography() {
 
-    var inputs = document.getElementsByClassName("gui-input");
+    var inputs = document.getElementsByClassName('gui-input');
 
     //Topography
     topographyHeight = inputs.topographyHeight.value;
-    vectorHeight.set ( topographyHeight, topographyHeight );
+    vectorHeight.set(topographyHeight, topographyHeight);
 
     //fog
     fogIntensity = inputs.fogIntensity.value;
@@ -49,19 +49,58 @@ function changeTopography() {
     lightPointColor = '0x' + inputs.lightPointColor.value.substring(1);
 
 
-    ambientLight.color.setHex( lightAmbientColor );
-    directionalLight.color.setHex( lightDirectionalColor );
-    pointLight.color.setHex( lightPointColor );
+    ambientLight.color.setHex(lightAmbientColor);
+    directionalLight.color.setHex(lightDirectionalColor);
+    pointLight.color.setHex(lightPointColor);
 
+    //code
+
+    generateCode();
 
 }
+
+function toggleSidebar() {  
+    var sidebar = document.getElementById('sidebar-gui');
+    sidebar.classList.toggle('open');
+}
+
+function generateCode() {
+    var el = document.getElementsByClassName('topography-code')[0];
+    el.innerHTML = 
+
+`// GLOBALS
+
+//topography
+var topographyHeight = ${topographyHeight};
+
+//fog
+var fogIntensity = ${fogIntensity};
+var fogColor = ${fogColor};
+
+//camera
+var cameraHeight = ${cameraHeight};
+var cameraTilt = ${cameraTilt};
+var cameraPan = ${cameraPan};
+
+//lights
+
+var lightAmbientColor = ${lightAmbientColor};
+var lightDirectionalColor = ${lightDirectionalColor};
+var lightPointColor = ${lightPointColor};`
+
+}
+
+generateCode()
+
+//--------------------------------------------------
 
 if (!Detector.webgl) Detector.addGetWebGLMessage();
 
 var SCREEN_WIDTH = window.innerWidth;
 var SCREEN_HEIGHT = window.innerHeight;
 
-var renderer, container, stats;
+// var renderer, container, stats;
+var renderer, container;
 
 var camera, scene, controls;
 // var camera, scene;
@@ -92,8 +131,8 @@ init();
 animate();
 
 function restart() {
-   init();
-   animate(); 
+    init();
+    animate();
 }
 
 function init() {
@@ -276,8 +315,8 @@ function init() {
 
     // STATS
 
-    stats = new Stats();
-    container.appendChild(stats.dom);
+    // stats = new Stats();
+    // container.appendChild(stats.dom);
 
     // EVENTS
 
@@ -325,7 +364,7 @@ function animate() {
     requestAnimationFrame(animate);
 
     render();
-    stats.update();
+    // stats.update();
 
 }
 
