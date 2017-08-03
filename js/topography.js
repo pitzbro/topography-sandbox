@@ -71,22 +71,22 @@ function generateCode() {
 `// GLOBALS
 
 //topography
-var topographyHeight = ${topographyHeight};
+topographyHeight: ${topographyHeight},
 
 //fog
-var fogIntensity = ${fogIntensity};
-var fogColor = ${fogColor};
+fogIntensity: ${fogIntensity},
+fogColor: ${fogColor},
 
 //camera
-var cameraHeight = ${cameraHeight};
-var cameraTilt = ${cameraTilt};
-var cameraPan = ${cameraPan};
+cameraHeight: ${cameraHeight},
+cameraTilt: ${cameraTilt},
+cameraPan: ${cameraPan},
 
 //lights
 
-var lightAmbientColor = ${lightAmbientColor};
-var lightDirectionalColor = ${lightDirectionalColor};
-var lightPointColor = ${lightPointColor};`
+lightAmbientColor: ${lightAmbientColor},
+lightDirectionalColor: ${lightDirectionalColor},
+lightPointColor: ${lightPointColor}`
 
 }
 
