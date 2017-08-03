@@ -137,7 +137,7 @@ function restart() {
 
 function init() {
 
-    console.log('initing');
+    console.log('initing', terrain);
 
     container = document.getElementById('container');
 
@@ -216,6 +216,7 @@ function init() {
     // TEXTURES
 
     var loadingManager = new THREE.LoadingManager(function () {
+        console.log('terrain', terrain);
         terrain.visible = true;
     });
     var textureLoader = new THREE.TextureLoader(loadingManager);
