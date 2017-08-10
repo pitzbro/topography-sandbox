@@ -28,6 +28,21 @@
 			<input class="gui-input" 
 				   name="topographyHeight" 
 				   type="range" 
+				   value="375" 
+				   min="0" 
+				   max="1500"  
+				   step="25"  
+				   oninput="changeTopography()">
+
+			</div>
+			<div>
+
+
+			<label>Topography Intensity</label>
+			
+			<input class="gui-input" 
+				   name="topographyIntensity" 			   
+				   type="range" 
 				   value="1.5" 
 				   min="0" 
 				   max="5"  
@@ -37,6 +52,26 @@
 			</div>
 
 			</section>
+			<section>
+
+			<h2>Textures</h2>
+
+			<div>
+
+			<label>Textures Repeat</label>
+			
+			<input class="gui-input" 
+				   name="texturesRepeat" 
+				   type="range" 
+				   value="6" 
+				   min="5" 
+				   max="30"  
+				   step="1"  
+				   oninput="changeTopography()">
+
+			</div>
+			</section>
+
 			<section>	
 
 			<h2>Fog</h2>

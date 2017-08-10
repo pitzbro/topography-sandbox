@@ -1,8 +1,12 @@
 // GLOBALS
 
 //topography
-var topographyHeight = 1.5;
-var vectorHeight = new THREE.Vector2(topographyHeight, topographyHeight);
+var topographyIntensity = 1.5;
+var vectorHeight = new THREE.Vector2(topographyIntensity, topographyIntensity);
+var topographyHeight = 375;
+
+//Textures
+var texturesRepeat = 5;
 
 //fog
 var fogIntensity = 2000;
@@ -14,7 +18,6 @@ var cameraTilt = 1500;
 var cameraPan = -1500;
 
 //lights
-
 var lightAmbientColor = '0x111111';
 var lightDirectionalColor = '0xffffff';
 var lightPointColor = '0xff4400';
@@ -26,7 +29,14 @@ function changeTopography() {
 
     //Topography
     topographyHeight = inputs.topographyHeight.value;
-    vectorHeight.set(topographyHeight, topographyHeight);
+    uniformsTerrain['uDisplacementScale'].value = topographyHeight;
+
+    topographyIntensity = inputs.topographyIntensity.value;
+    vectorHeight.set(topographyIntensity, topographyIntensity);
+
+    //Textures
+    texturesRepeat = inputs.texturesRepeat.value;
+    uniformsTerrain['uRepeatOverlay'].value.set(texturesRepeat, texturesRepeat);
 
     //fog
     fogIntensity = inputs.fogIntensity.value;
@@ -72,6 +82,10 @@ function generateCode() {
 
 //topography
 topographyHeight: ${topographyHeight},
+topographyIntensity: ${topographyIntensity},
+
+//textures
+texturesRepeat: ${texturesRepeat},
 
 //fog
 fogIntensity: ${fogIntensity},
@@ -262,7 +276,7 @@ function init() {
 
     uniformsTerrain['shininess'].value = 30;
 
-    uniformsTerrain['uDisplacementScale'].value = 375;
+    uniformsTerrain['uDisplacementScale'].value = topographyHeight;
 
     uniformsTerrain['uRepeatOverlay'].value.set(6, 6);
 
@@ -393,7 +407,7 @@ function render() {
         directionalLight.intensity = THREE.Math.mapLinear(valNorm, 0, 1, 0.1, 1.15);
         pointLight.intensity = THREE.Math.mapLinear(valNorm, 0, 1, 0.9, 1.5);
 
-        uniformsTerrain['uNormalScale'].value = THREE.Math.mapLinear(valNorm, 0, 1, 0.6, 3.5);
+        uniformsTerrain['uNormalScale'].value = THREE.Math.mapLinear(valNorm, 0, 1, 0.6, 8);
 
         if (updateNoise) {
 
