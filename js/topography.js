@@ -113,11 +113,9 @@ if (!Detector.webgl) Detector.addGetWebGLMessage();
 var SCREEN_WIDTH = window.innerWidth;
 var SCREEN_HEIGHT = window.innerHeight;
 
-// var renderer, container, stats;
 var renderer, container;
 
 var camera, scene, controls;
-// var camera, scene;
 var cameraOrtho, sceneRenderTarget;
 
 var uniformsNoise, uniformsNormal, uniformsTerrain,
@@ -187,7 +185,6 @@ function init() {
 
     ambientLight = new THREE.AmbientLight(0x111111);
     scene.add(ambientLight);
-    // scene.add(new THREE.AmbientLight(lightAmbientColor));
 
     directionalLight = new THREE.DirectionalLight(0xffffff, 1.15);
     directionalLight.position.set(500, 2000, 0);
@@ -238,13 +235,9 @@ function init() {
     var specularMap = new THREE.WebGLRenderTarget(2048, 2048, pars);
     specularMap.texture.generateMipmaps = false;
 
-    // var diffuseTexture1 = textureLoader.load("textures/terrain/grasslight-big.jpg");
-    // var diffuseTexture2 = textureLoader.load("textures/terrain/backgrounddetailed6.jpg");
-    // var detailTexture = textureLoader.load("textures/terrain/grasslight-big-nm.jpg");
-
-    var diffuseTexture1 = textureLoader.load("textures/terrain/001.jpg");
-    var diffuseTexture2 = textureLoader.load("textures/terrain/002.jpg");
-    var detailTexture = textureLoader.load("textures/terrain/003.jpg");
+    var diffuseTexture1 = textureLoader.load("textures/terrain/1.jpg");
+    var diffuseTexture2 = textureLoader.load("textures/terrain/2.jpg");
+    var detailTexture = textureLoader.load("textures/terrain/3.jpg");
 
     diffuseTexture1.wrapS = diffuseTexture1.wrapT = THREE.RepeatWrapping;
     diffuseTexture2.wrapS = diffuseTexture2.wrapT = THREE.RepeatWrapping;
@@ -328,18 +321,9 @@ function init() {
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     container.appendChild(renderer.domElement);
 
-    // STATS
-
-    // stats = new Stats();
-    // container.appendChild(stats.dom);
-
-    // EVENTS
-
     onWindowResize();
 
     window.addEventListener('resize', onWindowResize, false);
-
-    // document.addEventListener('keydown', onKeyDown, false);
 
 }
 
@@ -357,29 +341,11 @@ function onWindowResize(event) {
 
 }
 
-//
-
-// function onKeyDown(event) {
-
-//     switch (event.keyCode) {
-
-//         case 78: /*N*/  lightDir *= -1; break;
-//         case 77: /*M*/  animDeltaDir *= -1; break;
-
-
-//     }
-//     console.log('animDeltaDir', animDeltaDir);
-
-// }
-
-//
-
 function animate() {
 
     requestAnimationFrame(animate);
 
     render();
-    // stats.update();
 
 }
 
@@ -399,7 +365,6 @@ function render() {
 
         var valNorm = (lightVal - fLow) / (fHigh - fLow);
 
-        // scene.fog.color.setHSL(0.1, 0.5, lightVal);
         scene.fog.color.setHex(fogColor);
 
         renderer.setClearColor(scene.fog.color);
