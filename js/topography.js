@@ -1,29 +1,70 @@
 // GLOBALS
 
-//topography
-var topographyIntensity = 1.5;
 var vectorHeight = new THREE.Vector2(topographyIntensity, topographyIntensity);
+//topography
 var topographyHeight = 375;
+var topographyIntensity = 1.5;
 
 //Textures
-var texturesRepeat = 5;
+var texturesRepeat = 27;
 
 //fog
-var fogIntensity = 2000;
+var fogIntensity = 1000;
 var fogColor = '0x000000';
 
 //camera
-var cameraHeight = 1500;
+var cameraHeight = 2000;
 var cameraTilt = 1500;
-var cameraPan = -1500;
+var cameraPan = -830;
 
 //lights
-var lightAmbientColor = '0x111111';
+var lightAmbientColor = '0x432d2d';
 var lightDirectionalColor = '0xffffff';
-var lightPointColor = '0xff4400';
+var lightPointColor = '0x8c8c8c';
+
+function resetTypography() {
+    //Topography
+    uniformsTerrain['uDisplacementScale'].value = topographyHeight;
+    vectorHeight.set(topographyIntensity, topographyIntensity);
+
+    //Textures
+    uniformsTerrain['uRepeatOverlay'].value.set(texturesRepeat, texturesRepeat);
+
+    //fog
+    scene.fog.near = fogIntensity;
+    scene.fog.color.setHex(fogColor);
+
+    //Camera
+    camera.position.set(cameraPan, cameraHeight, cameraTilt);
+
+    //lights
+    ambientLight.color.setHex(lightAmbientColor);
+    directionalLight.color.setHex(lightDirectionalColor);
+    pointLight.color.setHex(lightPointColor);
+}
+
+function updateTypography(cords) {
+
+    const { x, y } = cords
+
+    console.log('x', x, 'y', y,);
+    // const cameraHeightMin = 0;
+    // const cameraHeightMax = 3000;
+
+    const cHeight = 3000 * (1 - y);
+    const cTilt = 3000 * x;
+    const cPan = -3000 * (1 - x);
+    camera.position.set(cPan, cHeight, cTilt);
+    // const tHeight = 3000 * y;
+    // uniformsTerrain['uDisplacementScale'].value = tHeight;
+
+
+
+}
 
 
 function changeTopography() {
+
 
     var inputs = document.getElementsByClassName('gui-input');
 
@@ -69,16 +110,16 @@ function changeTopography() {
 
 }
 
-function toggleSidebar() {  
+function toggleSidebar() {
     var sidebar = document.getElementById('sidebar-gui');
     sidebar.classList.toggle('open');
 }
 
 function generateCode() {
     var el = document.getElementsByClassName('topography-code')[0];
-    el.innerHTML = 
+    el.innerHTML =
 
-`// GLOBALS
+        `// GLOBALS
 
 //topography
 topographyHeight: ${topographyHeight},
@@ -149,7 +190,7 @@ function restart() {
 
 function init() {
 
-    console.log('initing', terrain);
+    console.log('initing')
 
     container = document.getElementById('container');
 
@@ -179,18 +220,18 @@ function init() {
     // SCENE (FINAL)
 
     scene = new THREE.Scene();
-    scene.fog = new THREE.Fog(0x050505, fogIntensity, 4000);
+    scene.fog = new THREE.Fog(0x000000, fogIntensity, 4000);
 
     // LIGHTS
 
-    ambientLight = new THREE.AmbientLight(0x111111);
+    ambientLight = new THREE.AmbientLight(0x432d2d);
     scene.add(ambientLight);
 
     directionalLight = new THREE.DirectionalLight(0xffffff, 1.15);
     directionalLight.position.set(500, 2000, 0);
     scene.add(directionalLight);
 
-    pointLight = new THREE.PointLight(0xff4400, 1.5);
+    pointLight = new THREE.PointLight(0x8c8c8c, 1.5);
     pointLight.position.set(0, 0, 0);
     scene.add(pointLight);
 
@@ -235,8 +276,8 @@ function init() {
     var specularMap = new THREE.WebGLRenderTarget(2048, 2048, pars);
     specularMap.texture.generateMipmaps = false;
 
-    var diffuseTexture1 = textureLoader.load("textures/terrain/1.jpg");
-    var diffuseTexture2 = textureLoader.load("textures/terrain/2.jpg");
+    var diffuseTexture1 = textureLoader.load("textures/terrain/13.jpg");
+    var diffuseTexture2 = textureLoader.load("textures/terrain/13.jpg");
     var detailTexture = textureLoader.load("textures/terrain/3.jpg");
 
     diffuseTexture1.wrapS = diffuseTexture1.wrapT = THREE.RepeatWrapping;
@@ -321,6 +362,9 @@ function init() {
     renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
     container.appendChild(renderer.domElement);
 
+    // changeTopography()
+    resetTypography()
+
     onWindowResize();
 
     window.addEventListener('resize', onWindowResize, false);
@@ -396,3 +440,19 @@ function render() {
     }
 
 }
+
+
+///--------------user interactions-----------------------///
+
+const canvas = document.querySelector('canvas');
+
+const { width, height, x, y } = canvas.getBoundingClientRect();
+canvas.onmousemove = (ev) => {
+    const { clientX, clientY } = ev
+
+    const precX = clientX / (width + x);
+    const precY = clientY / (height + y);
+
+    updateTypography({ x: precX, y: precY })
+}
+

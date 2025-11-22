@@ -1,246 +1,191 @@
-
 <!DOCTYPE HTML>
 <html lang="en">
-	<head>
-		<title>three.js webgl - dynamic procedural terrain</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<link rel="stylesheet" media="all" type="text/css" href="css/demo.css"/>
-	</head>
 
-	<body>
-		<div id="container"></div>
+<head>
+	<title>three.js webgl - dynamic procedural terrain</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<link rel="stylesheet" media="all" type="text/css" href="css/demo.css" />
+</head>
 
-		<div id="sidebar-gui" class="sidebar gui open">
+<body>
+	<div id="container"></div>
 
-			<button id="toggle-sidebar-btn" class="toggle-sidebar-btn" onclick="toggleSidebar()"></button>
+	<div id="sidebar-gui" class="sidebar gui open">
 
-			<div class="scroll-el">
+		<button id="toggle-sidebar-btn" class="toggle-sidebar-btn" onclick="toggleSidebar()"></button>
+
+		<div class="scroll-el">
 
 			<section>
 
-			<h2>Topography</h2>
+				<h2>Topography</h2>
 
-			<div>
+				<div>
 
-			<label>Topography Height</label>
-			
-			<input class="gui-input" 
-				   name="topographyHeight" 
-				   type="range" 
-				   value="375" 
-				   min="0" 
-				   max="1500"  
-				   step="25"  
-				   oninput="changeTopography()">
+					<label>Topography Height</label>
 
-			</div>
-			<div>
+					<input class="gui-input" name="topographyHeight" type="range" value="375" min="0" max="1500"
+						step="25" oninput="changeTopography()">
+
+				</div>
+				<div>
 
 
-			<label>Topography Intensity</label>
-			
-			<input class="gui-input" 
-				   name="topographyIntensity" 			   
-				   type="range" 
-				   value="1.5" 
-				   min="0" 
-				   max="5"  
-				   step="0.1"  
-				   oninput="changeTopography()">
+					<label>Topography Intensity</label>
 
-			</div>
+					<input class="gui-input" name="topographyIntensity" type="range" value="1.5" min="0" max="5"
+						step="0.1" oninput="changeTopography()">
+
+				</div>
 
 			</section>
 			<section>
 
-			<h2>Textures</h2>
+				<h2>Textures</h2>
 
-			<div>
+				<div>
 
-			<label>Textures Repeat</label>
-			
-			<input class="gui-input" 
-				   name="texturesRepeat" 
-				   type="range" 
-				   value="6" 
-				   min="5" 
-				   max="30"  
-				   step="1"  
-				   oninput="changeTopography()">
+					<label>Textures Repeat</label>
 
-			</div>
+					<input class="gui-input" name="texturesRepeat" type="range" value="27" min="5" max="30" step="1"
+						oninput="changeTopography()">
+
+				</div>
 			</section>
 
-			<section>	
+			<section>
 
-			<h2>Fog</h2>
+				<h2>Fog</h2>
 
-			<div>
+				<div>
 
-			<label>Fog Color</label>
+					<label>Fog Color</label>
 
-			<input class="gui-input" 
-				   name="fogColor" 
-				   type="color" 
-				   value="#000000" 
-				   oninput="changeTopography()">
+					<input class="gui-input" name="fogColor" type="color" value="#000000" oninput="changeTopography()">
 
-			</div>
-			<div>
+				</div>
+				<div>
 
-			<label>Fog Intensity</label>
+					<label>Fog Intensity</label>
 
-			<input class="gui-input" 
-				   name="fogIntensity" 
-				   type="range" 
-				   value="2000" 
-				   min="0" 
-				   max="3000"  
-				   step="10" 
-				   list="camera-tickmarks" 
-				   oninput="changeTopography()">
+					<input class="gui-input" name="fogIntensity" type="range" value="2000" min="0" max="3000" step="10"
+						list="camera-tickmarks" oninput="changeTopography()">
 
-			</div>
+				</div>
 
 			</section>
-			<section>	
+			<section>
 
-			<h2>Camera</h2>
+				<h2>Camera</h2>
 
-			<div>
+				<div>
 
-			<label>Camera Height</label>
+					<label>Camera Height</label>
 
-			<input class="gui-input" 
-				   name="cameraHeightRange" 
-				   type="range" 
-				   value="1500" 
-				   min="0" 
-				   max="3000"  
-				   step="10" 
-				   list="camera-tickmarks" 
-				   oninput="changeTopography()">
+					<input class="gui-input" name="cameraHeightRange" type="range" value="2000" min="0" max="3000"
+						step="10" list="camera-tickmarks" oninput="changeTopography()">
 
-			</div>
-			<div>
+				</div>
+				<div>
 
-			<label>Camera Tilt/Pan</label>
-			<div>
+					<label>Camera Tilt/Pan</label>
+					<div>
 
-			<input class="gui-input" 
-				   name="cameraTiltRange" 
-				   type="range" 
-				   value="1500" 
-				   min="0" 
-				   max="3000"  
-				   step="10" 
-				   list="camera-tickmarks" 
-				   oninput="changeTopography()">
+						<input class="gui-input" name="cameraTiltRange" type="range" value="1000" min="0" max="3000"
+							step="10" list="camera-tickmarks" oninput="changeTopography()">
 
 
-			<input class="gui-input" 
-				   name="cameraPanRange" 
-				   type="range" 
-				   value="-1500" 
-				   min="-3000" 
-				   max="0"  
-				   step="10" 
-				   list="camera-tickmarks-minus" 
-				   oninput="changeTopography()">
-			</div>
+						<input class="gui-input" name="cameraPanRange" type="range" value="-1500" min="-3000" max="0"
+							step="10" list="camera-tickmarks-minus" oninput="changeTopography()">
+					</div>
 
-			</div>
+				</div>
 
-			<datalist id="camera-tickmarks">
-				<option value="0" label="0">
-				<option value="500">
-				<option value="1000">
-				<option value="1500"  label="1500">
-				<option value="2000">
-				<option value="2500">
-				<option value="3000" label="3000">
-			</datalist>
+				<datalist id="camera-tickmarks">
+					<option value="0" label="0">
+					<option value="500">
+					<option value="1000">
+					<option value="1500" label="1500">
+					<option value="2000">
+					<option value="2500">
+					<option value="3000" label="3000">
+				</datalist>
 
-			<datalist id="camera-tickmarks-minus">
-				<option value="0" label="0">
-				<option value="-500">
-				<option value="-1000">
-				<option value="-1500"  label="-1500">
-				<option value="-2000">
-				<option value="-2500">
-				<option value="-3000" label="-3000">
-			</datalist>
+				<datalist id="camera-tickmarks-minus">
+					<option value="0" label="0">
+					<option value="-500">
+					<option value="-1000">
+					<option value="-1500" label="-1500">
+					<option value="-2000">
+					<option value="-2500">
+					<option value="-3000" label="-3000">
+				</datalist>
 
 			</section>
-			<section>	
+			<section>
 
-			<h2>Lights</h2>
+				<h2>Lights</h2>
 
-			<div>
+				<div>
 
-			<label>Ambient Light</label>
+					<label>Ambient Light</label>
 
-			<input class="gui-input" 
-				   name="lightAmbientColor" 
-				   type="color" 
-				   value="#111111" 
-				   oninput="changeTopography()">
+					<input class="gui-input" name="lightAmbientColor" type="color" value="#111111"
+						oninput="changeTopography()">
 
-			</div>
+				</div>
 
-			<div>
-				
-			<label>Directional Light</label>
+				<div>
 
-			<input class="gui-input" 
-				   name="lightDirectionalColor" 
-				   type="color" 
-				   value="#ffffff" 
-				   oninput="changeTopography()">
+					<label>Directional Light</label>
 
-			</div>
+					<input class="gui-input" name="lightDirectionalColor" type="color" value="#ffffff"
+						oninput="changeTopography()">
+
+				</div>
 
 
-			<div>
+				<div>
 
-			<label>Point Light</label>
+					<label>Point Light</label>
 
-			<input class="gui-input" 
-				   name="lightPointColor" 
-				   type="color" 
-				   value="#ff4400" 
-				   oninput="changeTopography()">
+					<input class="gui-input" name="lightPointColor" type="color" value="#8c8c8c"
+						oninput="changeTopography()">
 
-			</div>
+				</div>
 
 			</section>
-			<section>	
+			<section>
 
-			<h2>Code</h2>
+				<h2>Code</h2>
 
-			<pre><code class="topography-code"></code></pre>
+				<pre><code class="topography-code"></code></pre>
 
 			</section>
-			
-			</div>
 
-			<div>
+		</div>
+
+		<div>
 
 		</div>
 
 
 		<script src="js/threejs/three.js"></script>
-
 		<script src="js/threejs/addons/OrbitControls.js"></script>
-
 		<script src="js/threejs/addons/BufferGeometryUtils.js"></script>
-
 		<script src="js/threejs/addons/NormalMapShader.js"></script>
 		<script src="js/threejs/addons/ShaderTerrain.js"></script>
-
 		<script src="js/threejs/addons/Detector.js"></script>
 		<script src="js/threejs/addons/stats.min.js"></script>
+
+
+
+
+
+
+
+
 
 		<script id="fragmentShaderNoise" type="x-shader/x-fragment">
 
@@ -375,17 +320,18 @@
 			varying vec2 vUv;
 			uniform vec2 scale;
 			uniform vec2 offset;
-
+			
 			void main( void ) {
-
+				
 				vUv = uv * scale + offset;
 				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
+				
 			}
-
+			
 		</script>
-
 		<script src="js/topography.js"></script>
 
-	</body>
+
+</body>
+
 </html>
