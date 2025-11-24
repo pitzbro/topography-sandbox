@@ -1,21 +1,19 @@
-::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 5px;
-	background-color: transparent;
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    background-color: transparent;
 }
 
-::-webkit-scrollbar
-{
-	width: 6px;
-	background-color: transparent;
+::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb
-{
-	border-radius: 5px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: rgba(153, 153, 153, 0.7);;
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: rgba(153, 153, 153, 0.7);
+    ;
 }
 
 body {
@@ -25,7 +23,7 @@ body {
     margin: 0;
     overflow: hidden;
     font-family: georgia;
-    font-size:1em;
+    font-size: 1em;
     text-align: center;
     line-height: 1;
 }
@@ -38,33 +36,54 @@ h2 {
     color: #fff;
 }
 
+input {
+    accent-color: #FF593E;
+}
+
 pre {
     padding-bottom: 30px;
     overflow-x: auto;
 }
 
-#info { position: absolute; top: 10px; width: 100%; }
+#info {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+}
 
-a { color: #fb0; }
+a {
+    color: #fb0;
+}
 
-#footer { position: absolute; bottom: 10px; width: 100%; }
-.h { color: #fb0 }
-.c { display: inline; margin-left: 1em }
+#footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+}
+
+.h {
+    color: #fb0
+}
+
+.c {
+    display: inline;
+    margin-left: 1em
+}
 
 /*----Asi changes---*/
 
 button.toggle-sidebar-btn {
-    width: 40px;
+    width: 30px;
     height: 40px;
     position: absolute;
-    right: -40px;
+    right: -30px;
     top: 50px;
-    background: rgba(193, 73, 73, 0.29);
+    background-color: #000;
     color: #fff;
-    border-left: none;
     border-radius: 0 50% 50% 0;
-    padding: 0;
-    border: none;
+    padding-inline-end: 12px;
+    border: 1px solid #505050;
+    border-inline-start-color: #000;
     cursor: pointer;
 }
 
@@ -81,7 +100,7 @@ button:focus {
 }
 
 
-.sidebar {    
+.sidebar {
     position: absolute;
     z-index: 900;
     left: 0;
@@ -89,6 +108,7 @@ button:focus {
     width: 350px;
     height: 100%;
     background: rgba(0, 0, 0, 0.56);
+    border-inline-end: 1px solid #505050;
     padding: 15px;
     text-align: left;
     transform: translate(-100%, 0);
@@ -105,18 +125,18 @@ button:focus {
     transform: translate(0, 0);
 }
 
-.sidebar section {    
+.sidebar section {
     background: rgba(74, 74, 74, 0.24);
     padding: 1px 15px;
     margin-bottom: 15px;
     border-radius: 10px;
 }
 
-.sidebar label {    
+.sidebar label {
     width: 100%;
 }
 
-.sidebar section > div {
+.sidebar section>div {
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -47,7 +47,6 @@ function updateTypography(cords) {
 
     const { x, y } = cords
 
-    console.log('x', x, 'y', y,);
     // const cameraHeightMin = 0;
     // const cameraHeightMax = 3000;
 
@@ -190,8 +189,6 @@ function restart() {
 
 function init() {
 
-    console.log('initing')
-
     container = document.getElementById('container');
 
     // SCENE (RENDER TARGET)
@@ -268,7 +265,6 @@ function init() {
     // TEXTURES
 
     var loadingManager = new THREE.LoadingManager(function () {
-        console.log('terrain', terrain);
         terrain.visible = true;
     });
     var textureLoader = new THREE.TextureLoader(loadingManager);
@@ -276,8 +272,8 @@ function init() {
     var specularMap = new THREE.WebGLRenderTarget(2048, 2048, pars);
     specularMap.texture.generateMipmaps = false;
 
-    var diffuseTexture1 = textureLoader.load("textures/terrain/13.jpg");
-    var diffuseTexture2 = textureLoader.load("textures/terrain/13.jpg");
+    var diffuseTexture1 = textureLoader.load("textures/terrain/14.jpg");
+    var diffuseTexture2 = textureLoader.load("textures/terrain/14.jpg");
     var detailTexture = textureLoader.load("textures/terrain/3.jpg");
 
     diffuseTexture1.wrapS = diffuseTexture1.wrapT = THREE.RepeatWrapping;

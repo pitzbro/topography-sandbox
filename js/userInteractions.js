@@ -7,6 +7,5 @@ export default function userInteractions() {
 
         const precX = clientX / (width + x) * 100;
         const precY = clientY / (height + y) * 100;
-        console.log('precX', precX, 'precY', precY,)
     }
 }
