@@ -2,23 +2,23 @@
 
 var vectorHeight = new THREE.Vector2(topographyIntensity, topographyIntensity);
 //topography
-var topographyHeight = 375;
-var topographyIntensity = 1.5;
+var topographyHeight = 1500;
+var topographyIntensity = 5;
 
 //Textures
-var texturesRepeat = 27;
+var texturesRepeat = 10;
 
 //fog
-var fogIntensity = 1000;
+var fogIntensity = 2500;
 var fogColor = '0x000000';
 
 //camera
-var cameraHeight = 2000;
-var cameraTilt = 1500;
-var cameraPan = -830;
+var cameraHeight = 3000;
+var cameraTilt = 0;
+var cameraPan = -3000;
 
 //lights
-var lightAmbientColor = '0x432d2d';
+var lightAmbientColor = '0x111111';
 var lightDirectionalColor = '0xffffff';
 var lightPointColor = '0x8c8c8c';
 
@@ -272,8 +272,10 @@ function init() {
     var specularMap = new THREE.WebGLRenderTarget(2048, 2048, pars);
     specularMap.texture.generateMipmaps = false;
 
-    var diffuseTexture1 = textureLoader.load("textures/terrain/14.jpg");
-    var diffuseTexture2 = textureLoader.load("textures/terrain/14.jpg");
+    var diffuseTexture1 = textureLoader.load("textures/4/1.jpg");
+    var diffuseTexture2 = textureLoader.load("textures/4/2.jpg");
+    // var diffuseTexture1 = textureLoader.load("textures/terrain/14.jpg");
+    // var diffuseTexture2 = textureLoader.load("textures/terrain/14.jpg");
     var detailTexture = textureLoader.load("textures/terrain/3.jpg");
 
     diffuseTexture1.wrapS = diffuseTexture1.wrapT = THREE.RepeatWrapping;
