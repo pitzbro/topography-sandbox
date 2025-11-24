@@ -2,8 +2,8 @@
 
 var vectorHeight = new THREE.Vector2(topographyIntensity, topographyIntensity);
 //topography
-var topographyHeight = 1500;
-var topographyIntensity = 5;
+var topographyHeight = 1325;
+var topographyIntensity = 2.7;
 
 //Textures
 var texturesRepeat = 10;
@@ -15,12 +15,12 @@ var fogColor = '0x000000';
 //camera
 var cameraHeight = 3000;
 var cameraTilt = 0;
-var cameraPan = -3000;
+var cameraPan = -2500;
 
 //lights
-var lightAmbientColor = '0x111111';
+var lightAmbientColor = '0xd6d6d6';
 var lightDirectionalColor = '0xffffff';
-var lightPointColor = '0x8c8c8c';
+var lightPointColor = '0x787878';
 
 function resetTypography() {
     //Topography
