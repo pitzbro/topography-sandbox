@@ -37,7 +37,11 @@ h2 {
 }
 
 input {
-    accent-color: #FF593E;
+    accent-color: #EC8A2E;
+
+    &[type="range"] {
+        cursor: pointer;
+    }
 }
 
 pre {
